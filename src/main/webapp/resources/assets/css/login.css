@@ -1,0 +1,83 @@
+@charset "UTF-8";
+.logo {
+
+	background-color: #1483F6;
+	color: #fff;
+	border-radius: 15px 15px 15px 15px;
+	font-weight: 400;
+	box-shadow: 5px 5px 10px grey;
+	padding: 15px 20px 15px 20px;
+	font-size: 22px !important;
+	
+}
+
+.body-sign .panel-sign .panel-body {
+    background: #FFF;
+    border-top: 5px solid #cccccc;
+    border-radius: 5px 0 5px 5px;
+    box-shadow: 5px 5px 10px grey;
+    padding: 33px 33px 15px;
+}
+
+.logo:hover{
+	background-color: #303030;
+	color: #fff;
+	text-decoration: none;	
+}
+
+.logo:active{
+	background-color: #1483F6;
+	color: #fff;
+	text-decoration: none;	
+}
+.logo:after {
+	background-color: #1483F6;
+	color: #fff;
+	text-decoration: none;
+}
+.logo:before{
+	background-color: #1483F6;
+	color: #fff;
+	text-decoration: none;
+}
+.logo:visited {
+	background-color: #1483F6;
+	color: #fff;
+	text-decoration: none;
+}
+.error{
+	color:red;
+}
+
+.btn-google,.btn-google:visited {
+    /* background-color: #df4a32;
+    color: #fff;
+     */
+    background-color: #cf4a33;
+    color: #fff; 
+    box-shadow: 5px 5px 10px grey;     
+     
+  
+}
+
+.btn-google:hover,.btn-google:active,.btn-google:focus {
+   background-color: #fff ;
+     color: #000 ;
+     box-shadow: 5px 5px 10px grey;
+}
+
+#login_submit{
+	   width: 100%;
+    padding: 10px;
+    /* left: -5px; */
+    border-radius: 25px;
+    margin-top: 20px;
+}
+
+body { 
+  background: url(../images/log_bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

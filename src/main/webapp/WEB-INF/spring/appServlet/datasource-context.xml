@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+<!-- 		<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+	        <property name="driverClassName"    value="${db.driver}" />
+	        <property name="url"                value="${db.jdbcUrl}" />
+	        <property name="username"           value="${db.user}" />
+	        <property name="password"           value="${db.password}" />	        
+	        <property name="initialSize" value="0"/> 
+	        <property name="maxTotal" value="150"/> 
+	        <property name="maxIdle" value="20"/> 
+	        <property name="minIdle" value="20"/> 	        	     
+	        <property name="maxWaitMillis" value="3000"/>   pool이 고갈되었을 경우 최대 대기 타임 ms 
+	    </bean>
+ -->
+
+	
+	    <!-- mysql -->
+	    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	        <constructor-arg>
+	            <bean class="com.zaxxer.hikari.HikariConfig">
+	                <constructor-arg>
+	                    <props>
+	                        <prop key="jdbcUrl">${db.jdbcUrl}</prop>
+	                        <prop key="username">${db.user}</prop>
+	                        <prop key="password">${db.password}</prop>
+	                    </props>
+	                </constructor-arg>
+	                <property name="driverClassName" value="${db.driver}"/>
+	                <property name="maximumPoolSize" value="10" />	                
+	                <property name="connectionTimeout"  value="30000" />
+	                <property name="idleTimeout" value="35000" />
+	                <property name="maxLifetime" value="45000" />	                
+	            </bean>
+	        </constructor-arg>
+	    </bean>
+
+
+
+
+</beans>

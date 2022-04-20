@@ -1,0 +1,20 @@
+<%@page import="erp.common.util.CookieUtils"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<c:set var="localeCode" value="${pageContext.response.locale}" />
+<c:set var="HOME" value="${pageContext.request.contextPath}"/>
+<jsp:useBean id="today" class="java.util.Date" />
+<fmt:formatDate var="now" value="${today}" pattern="yyyy년 MM월 dd일  hh:mm:ss" />	
+<%
+	String htmlClass="";
+	if(CookieUtils.isExist("sidebar-left-collapsed", request)){
+		 htmlClass="fixed js flexbox flexboxlegacy csstransforms csstransforms3d no-overflowscrolling no-mobile-device custom-scroll sidebar-left-collapsed";
+	}else{
+		 htmlClass="fixed js flexbox flexboxlegacy csstransforms csstransforms3d no-overflowscrolling no-mobile-device custom-scroll";
+	}
+	request.setAttribute("sidebarCookie", htmlClass);
+%>

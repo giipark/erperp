@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="erp.web.dao.MemberDao">
+
+
+	<update id="memberUpdate">
+	 UPDATE tbl_member SET 
+	 	userid =#{userid},
+	    username=#{username},
+	   	email=#{email},  userpw =#{userpw} , updatedate=now()
+	   WHERE   	 mid=1
+	</update>
+	
+		
+	<select id="loginPasswd" resultType="string">
+	   SELECT userpw FROM tbl_member WHERE userid=#{userid} 
+	</select>
+	
+	
+	<select id="login" resultType="erp.web.domain.MemberVO">
+	   SELECT * from tbl_member WHERE userid=#{userid}
+	</select>
+	
+			
+	<select id="loginInfo"   resultType="erp.web.domain.MemberVO">
+	  SELECT * FROM tbl_member WHERE userid=#{userid}
+	</select>
+	
+     
+   	<select id="loginEmail"   resultType="erp.web.domain.MemberVO">
+	  SELECT * FROM tbl_member WHERE email=#{email}
+	</select>
+	  
+
+     
+     
+     
+</mapper>

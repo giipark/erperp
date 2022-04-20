@@ -1,0 +1,240 @@
+/* Add here all your CSS customizations */
+@charset "utf-8";
+
+.btn-custom{
+	margin: 5px;
+    padding: 1px 20px;
+}
+
+.btn-custom2{
+	margin: 3px;
+    padding: 2px 5px;
+}
+.label-custom{
+	padding: 5px 20px;
+}
+
+
+/* 자재정보관리 목록 조회 */
+.my-custom-scrollbar {
+position: relative;
+/* max-height: 400px; */
+height:420px;
+overflow: auto;
+}
+.table-wrapper-scroll-y {
+display: block;
+}
+
+ .my-custom-scrollbar::-webkit-scrollbar { width: 12px; height: 10%; cursor: pointer; }
+ .my-custom-scrollbar::-webkit-scrollbar-track-piece  { background-color: #fff; cursor: pointer;}
+ .my-custom-scrollbar::-webkit-scrollbar-thumb:vertical { height: 5%; background: #49cced; border-radius:8px; cursor: pointer !important;}
+ 	
+ #Progress_Loading
+{
+ position: absolute;
+ left: 47%;
+ top: 40%;
+}
+
+
+
+.bom-write-footer{
+	background: #f6f6f6;
+}
+
+.bom-toggle{
+	cursor: pointer;
+}
+.bom-toggle:hover {
+	background:#49cced ; 
+	color:#fff;
+}
+
+
+.table tr {
+    cursor: pointer;
+}
+.hiddenRow {
+    padding: 0 4px !important;
+    background-color: #eeeeee;
+    font-size: 13px;
+}
+
+
+/* datepicker 주말 색 */
+.datepicker-days .table-condensed tbody .day:first-child {
+ color: #e94b3b;
+}
+
+.datepicker-days .table-condensed tbody .day:last-child {
+  color: #0088cc;
+}
+
+.datepicker-days .table-condensed tbody .old {
+  color: #999999 !important;
+}
+
+.btn-custom3{
+	margin: 0px;
+    padding: 1px 5px;
+    font-size: 12px;
+}
+#applyPlus ,#applyPlus tr , #applyPlus tr td , #applyPlus tr th{
+    border:none !important;
+
+}
+
+.tooltip-inner{
+	 max-width: 200px;
+	 height:auto;
+}
+
+
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background: #49cced;
+   color: #fff;
+}
+
+.label-custom-process{
+	width: auto;
+}
+
+.text-process-status-3{
+	color:#d64742;
+}
+
+.my-custom-scrollbar5{
+    max-height: 420px;
+    height: auto; 
+}
+
+
+[data-tooltip-text]:hover {
+	position: relative;
+}
+
+[data-tooltip-text]:after {
+	-webkit-transition: bottom .3s ease-in-out, opacity .3s ease-in-out;
+	-moz-transition: bottom .3s ease-in-out, opacity .3s ease-in-out;
+	transition: bottom .3s ease-in-out, opacity .3s ease-in-out;
+
+	background-color: rgba(0, 0, 0, 0.8);
+
+  -webkit-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+	-moz-box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+	box-shadow: 0px 0px 3px 1px rgba(50, 50, 50, 0.4);
+	
+  -webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	
+  color: #FFFFFF;
+	font-size: 12px;
+	margin-bottom: 10px;
+	padding: 7px 12px;
+	position: absolute;
+	width: auto;
+	min-width: 50px;
+	max-width: 300px;
+	word-wrap: break-word;
+
+	z-index: 9999;
+
+	opacity: 0;
+	left: -9999px;
+  top: 90%;
+	
+	content: attr(data-tooltip-text);
+}
+
+[data-tooltip-text]:hover:after {
+	top: 130%;
+	left: 0;
+	opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+/* 흔들 */
+
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+.animated.hinge {
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+}
+
+.animated.bounceIn,
+.animated.bounceOut {
+  -webkit-animation-duration: .75s;
+  animation-duration: .75s;
+}
+
+.animated.flipOutX,
+.animated.flipOutY {
+  -webkit-animation-duration: .75s;
+  animation-duration: .75s;
+}
+
+@-webkit-keyframes shake {
+  from, to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+@keyframes shake {
+  from, to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+.shake {
+  -webkit-animation-name: shake;
+  animation-name: shake;
+}
+
+
+#errorMessage{
+	
+	color:red;
+}

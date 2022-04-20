@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="erp.web.dao.ManagementDao">
+
+	   <resultMap id="managerMaterialMAP"  type="erp.web.domain.MaterialVO">
+	 		 <result property="maid" column="maid"/>
+		    <result property="mcode" column="mcode"/>       
+	        <result property="materialName" column="material_name"/>
+	        <result property="properInventory" column="proper_inventory"/>					
+	    </resultMap>
+    
+    
+    <resultMap id="bomMAP"  type="erp.web.domain.BomVO">
+	 		<result property="bomid" column="bomid"/>
+		    <result property="pcode" column="pcode"/>       
+	        <result property="productName" column="product_name"/>	
+	        
+	        <result property="bomMaterialId" column="bom_material_id"/>       
+	        <result property="productQuantity" column="product_quantity"/>
+	        
+	        <result property="maid" column="maid"/>       
+	       	<result property="materialName" column="material_name"/>
+	       	<result property="materialQuantity" column="material_quantity"/>	
+	       	<result property="properInventory" column="proper_inventory"/>	
+	       	<result property="currentInventory" column="current_inventory"/>	       						
+	 </resultMap>
+ 
+
+
+
+	<insert id="insertMaterial" parameterType="java.util.List">
+	INSERT INTO tbl_material(
+			   mcode
+			  ,material_name
+			  ,proper_inventory
+			) 
+			VALUES
+		<foreach item="item" index="index" collection="list" separator=" , ">
+			 (
+			 #{item.mcode}
+			 ,#{item.materialName}
+			 ,#{item.properInventory}
+			)
+		</foreach>
+	</insert>
+	
+
+	<sql id="listSql">
+			<if test='mcode != null and mcode !="" '>
+				  AND  mcode LIKE concat('%', #{mcode} ,'%') 
+			</if>
+			
+			<if test='materialName != null and materialName !="" '>
+				  AND  material_name LIKE concat('%', #{materialName} ,'%') 
+			</if>
+	</sql>
+
+	<select id="selectMaterialSearchList" resultMap="managerMaterialMAP" >
+		<![CDATA[
+		SELECT A.*
+		
+		 FROM 
+		  	(
+		    SELECT  maid, mcode , material_name , proper_inventory , @ROWNUM := @ROWNUM + 1 AS no
+		    
+		    FROM tbl_material 
+
+		   ,(SELECT @ROWNUM := 0) R      
+		     
+		      WHERE mcode IS NOT NULL 
+		]]>	      
+		  <include refid="listSql" />
+		
+		<![CDATA[    
+		     ORDER BY mcode DESC
+		 ) A  
+
+		 ORDER BY no desc LIMIT #{pageStart}, #{perPageNum}
+		]]>	
+	</select>
+
+	<select id="selectMaterialSearchTotalCount" resultType="Integer">
+		SELECT count(*) FROM tbl_material WHERE mcode IS NOT NULL
+		
+		<include refid="listSql" />
+	</select>
+	
+	
+	<update id="materialUpdate" >
+		UPDATE tbl_material
+		SET
+		   mcode = #{mcode}
+		  ,material_name = #{materialName}
+		  ,proper_inventory = #{properInventory}
+		WHERE maid = #{maid}			
+	</update>
+
+
+	<delete id="materialDelete">
+		DELETE FROM tbl_material WHERE maid = #{maid}	
+	</delete>
+
+
+	<delete id="bomMaidMaterialDelete">
+		DELETE FROM tbl_bom_material WHERE maid = #{maid}	
+	</delete>
+
+
+	<select id="getBySearchList" resultMap="managerMaterialMAP" >
+		SELECT * FROM 	tbl_material  WHERE  mcode LIKE concat(#{mcode} , '%', '')  LIMIT 0, 7
+	</select>
+
+
+	<select id="mcodeJson" resultType="String">
+		SELECT mcode FROM 	tbl_material
+	</select>
+
+
+     
+     <select id="getByMcodeInfo" resultMap="bomMAP">
+      SELECT m.maid, m.mcode, m.material_name , m.proper_inventory, IFNULL(i.current_inventory, 0) AS current_inventory
+    
+     FROM  tbl_material AS m  
+        
+	 LEFT JOIN tbl_material_information AS i 
+	   
+	 ON m.maid = i.maid WHERE mcode=#{mcode}
+     </select>
+	  
+
+
+	 <insert id="insertBomProduct" >	 		 	
+	 	INSERT INTO tbl_bom_product( pcode, product_name) 
+	     	VALUES (#{pcode}, #{productName} )		     
+	 </insert>
+
+
+	<insert id="insertBomMaterial" parameterType="java.util.List">
+	INSERT INTO tbl_bom_material(
+			   bomid
+			  ,maid
+			  ,material_name
+			  ,material_quantity
+			) VALUES 
+		<foreach item="item" index="index" collection="list" separator=" , ">
+			 (
+			  (SELECT MAX(bomid) from tbl_bom_product)
+			 ,#{item.maid}
+			 ,#{item.materialName}
+			 ,#{item.materialQuantity}
+			)
+		</foreach>
+	</insert>
+
+
+
+
+	<sql id="bomListSql">
+			<if test='pcode != null and pcode !="" '>
+				  AND  pcode LIKE concat('%', #{pcode} ,'%') 
+			</if>
+			
+			<if test='productName != null and productName !="" '>
+				  AND  product_name LIKE concat('%', #{productName} ,'%') 
+			</if>
+	</sql>
+
+	
+	<select id="bomSearchTotalCount" resultType="Integer">
+		SELECT count(*) FROM tbl_bom_product WHERE bomid IS NOT NULL
+			
+			<include refid="bomListSql" />
+	</select>
+
+
+	<select id="bomSearchList"  resultMap="bomMAP">
+		<![CDATA[
+		SELECT A.*
+		
+		 FROM 
+		  	(
+		    SELECT  bomid, pcode , product_name , product_quantity , @ROWNUM := @ROWNUM + 1 AS no
+		    
+		    FROM tbl_bom_product 
+
+		   ,(SELECT @ROWNUM := 0) R      
+		     
+		      WHERE bomid IS NOT NULL 
+		]]>	      
+		 
+		 <include refid="bomListSql" />
+		
+		<![CDATA[    
+		     ORDER BY bomid DESC
+		 ) A  
+
+		 ORDER BY no desc LIMIT #{pageStart}, #{perPageNum}
+		]]>		
+	</select>
+
+
+
+	<select id="bomMaterialList" resultMap="bomMAP">
+		SELECT *
+		    FROM
+		     (
+
+		    SELECT bom.bomid, bom.maid, bom.material_name , bom.material_quantity ,
+
+					ma.mcode , @ROWNUM := @ROWNUM + 1 AS no
+					
+				   FROM tbl_bom_material AS bom
+					
+					INNER JOIN tbl_material AS ma ON bom.maid=ma.maid    ,(SELECT @ROWNUM := 0) R   
+
+				 WHERE bomid=#{bomid} ORDER BY bomid DESC
+		     
+		     ) A   ORDER BY no DESC
+	</select>
+
+
+
+	<select id="getByBomInfo" resultMap="bomMAP">
+		SELECT * FROM tbl_bom_product WHERE bomid=#{bomid}	
+	</select>
+
+
+	<delete id="bomMaterialDelete">
+		DELETE FROM tbl_bom_material WHERE bomid=#{bomid}	
+	</delete>
+
+	<delete id="bomProductDelete">
+		DELETE FROM tbl_bom_product WHERE bomid=#{bomid}	
+	</delete>
+	
+	
+	<update id="updateBomProduct">
+		UPDATE tbl_bom_product
+		SET
+		   pcode =#{pcode}
+		  ,product_name = #{productName}		  
+		WHERE bomid = #{bomid}	
+	</update>
+	
+	<insert id="updateBomMaterial">
+			INSERT INTO tbl_bom_material(
+			   bomid
+			  ,maid
+			  ,material_name
+			  ,material_quantity
+			) VALUES 
+		<foreach item="item" index="index" collection="list" separator=" , ">
+			 (
+			  #{item.bomid}
+			 ,#{item.maid}
+			 ,#{item.materialName}
+			 ,#{item.materialQuantity}
+			)
+		</foreach>
+	</insert>
+	
+</mapper>

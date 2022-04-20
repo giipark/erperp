@@ -1,0 +1,15 @@
+	@charset "utf-8"; 
+
+	/*이미지 css*/
+	*{margin:0px; padding:0px; font-family:"Malgun Gothic","맑은고딕",dotum,tahoma,verdana,sans-serif; color:#333;}
+
+	.topLogo {margin:20px}
+	.errorWrap {background:url('../images/icon_error.gif') no-repeat center top; padding:100px 25px 35px; margin:150px auto 0; text-align:center; width:530px;  position:relative; overflow:hidden}
+		.topText {color:#333; font-size:25px; font-weight:normal; display:block; padding:0 0 30px; letter-spacing:-1px}
+		.topText strong {display:block; font-size:70px}	
+			.top_tt02 strong {display:block; font-size:40px !important; margin-bottom:10px}	
+		
+		.conText {border-top:1px solid #e0e0e0; padding:30px 0 40px; text-align:center; font-size:14px; color:#666; line-height:22px; letter-spacing:-1px}
+		.btnBox {text-align:center}
+		.bottom {width:650px; height:10px; margin:0 auto; background-position: 0 -350px;}
+		color:#ff6600; 
